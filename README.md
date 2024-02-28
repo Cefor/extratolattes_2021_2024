@@ -43,7 +43,7 @@ Esta ferramenta, pode ser usada para produzir o extrato dos discentes, de modo q
 Da mesma forma, os egressos podem ser convidados a atualizar o Lattes a partir do envio do respectivo extrato e de mensagem explicativa, com orientações específicas de preenchimento, constituindo-se como ação de acompanhamento de egressos, item importante na avaliação Capes.
 
 
-## Pasta *_Documentos*
+## Pasta *Documentos*
 
 * **ManualPreenchimentoLattes.pdf**: contém instruções de preenchimento do currículo Lattes de forma que a pontuação possa ser computada corretamente no extrato; as instruções são ajustadas às orientações contidas nos documentos da área de Ciência Política e Relações Internacionais.
 
