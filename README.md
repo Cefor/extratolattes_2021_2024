@@ -1,4 +1,4 @@
-﻿## EXTRATO LATTES (2020-2024)
+﻿## EXTRATO LATTES (2021-2024)
 
 ### Autor: Fabiano Peruzzo Schwartz
 
