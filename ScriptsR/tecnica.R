@@ -23,7 +23,7 @@ tecnica <- function(id, xml_data,
       titulo <- str_trim(encode_xml2(titulo))
       
       natureza <- as.vector(ptec[[i]]$"DADOS-BASICOS-DO-MATERIAL-DIDATICO-OU-INSTRUCIONAL"["NATUREZA"])
-      natureza <- str_trim(str_to_lower(encode_xml2(natureza)))
+      natureza <- str_trim(encode_xml2(str_to_lower(natureza)))
 
       # novo qualis
       # TT == "QA" é o estrato qualificado pelo autor - o titulo da producao deve ser igual ao do Lattes do autor
@@ -62,6 +62,7 @@ tecnica <- function(id, xml_data,
     if((ano >= ano_ini & ano <= ano_fim) | fl_rlvnc=="SIM"){
       
       titulo <- as.vector(ptec[[i]]$"DADOS-BASICOS-DO-RELATORIO-DE-PESQUISA"["TITULO"])
+      titulo <- str_trim(encode_xml2(titulo))
       
       # novo qualis
       # TT == "QA" é o estrato qualificado pelo autor - o titulo da producao deve ser igual ao do Lattes do autor

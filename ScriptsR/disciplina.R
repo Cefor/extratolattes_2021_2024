@@ -13,9 +13,9 @@ disciplina <- function(id, xml_data,
     for(i in 1:n1){
       
       if(is.list(pdisciplina[[i]])){
-        instituicao <- str_to_lower(as.vector(pdisciplina[[i]]$".attrs"["NOME-INSTITUICAO"]))
+        instituicao <- encode_xml2(str_to_lower(as.vector(pdisciplina[[i]]$".attrs"["NOME-INSTITUICAO"])))
       } else {
-        instituicao <- str_to_lower(pdisciplina[[i]]["NOME-INSTITUICAO"])
+        instituicao <- encode_xml2(str_to_lower(pdisciplina[[i]]["NOME-INSTITUICAO"]))
       }
       n2 <- length(pdisciplina[[i]])
       

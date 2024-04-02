@@ -31,7 +31,7 @@ orientacao <- function(id, xml_data,
         
         # DADOS-BASICOS- ..... NATUREZA
         nivel <- as.vector(pori[[i]][[1]]["NATUREZA"])
-        nivel <- str_to_lower(gsub("_", " ", nivel))
+        nivel <- encode_xml2(str_to_lower(gsub("_", " ", nivel)))
         
         # DADOS-BASICOS- ..... TITULO
         titulo <- as.vector(pori[[i]][[1]]["TITULO"])
@@ -55,7 +55,7 @@ orientacao <- function(id, xml_data,
         # DETALHAMENTO- ... NOME-DA-INSTITUICAO
         instituicao <- as.vector(pori[[i]][[2]]["NOME-DA-INSTITUICAO"])
         if(is.null(instituicao)) instituicao <- ""
-        instituicao <- str_to_lower(instituicao)
+        instituicao <- encode_xml2(str_to_lower(instituicao))
         instituicao_aux <- str_replace_all(instituicao, "[^[:alnum:]]", "") 
   
         # DETALHAMENTO- ... NOME-DO-CURSO
@@ -110,7 +110,7 @@ orientacao <- function(id, xml_data,
         
         # DADOS-BASICOS- ..... NATUREZA
         nivel <- as.vector(pori[[i]][[1]]["NATUREZA"])
-        nivel <- str_to_lower(gsub("_", " ", nivel))
+        nivel <- encode_xml2(str_to_lower(gsub("_", " ", nivel)))
         
         # DADOS-BASICOS- ..... TITULO-DO-TRABALHO
         titulo <- as.vector(pori[[i]][[1]]["TITULO-DO-TRABALHO"])
@@ -124,7 +124,7 @@ orientacao <- function(id, xml_data,
           # tipo <- as.vector(pori[[i]][[2]]["TIPO-DE-ORIENTACAO-EM-ANDAMENTO"])
           tipo <- "orientador principal"
           
-          # o Lattes n?o admite informar o tipo de orientacao para especializacao, 
+          # o Lattes nao admite informar o tipo de orientacao para especializacao, 
           # iniciacao cientfica, profissionalizacao etc
           # contudo, marca automaticamente como CO-ORIENTADOR, o que eh irreal
           # portanto, corrige-se o tipo para "orientador principal"
@@ -134,7 +134,7 @@ orientacao <- function(id, xml_data,
         # DETALHAMENTO- ... NOME-INSTITUICAO
         instituicao <- as.vector(pori[[i]][[2]]["NOME-INSTITUICAO"])
         if(is.null(instituicao)) instituicao <- ""
-        instituicao <- str_to_lower(instituicao)
+        instituicao <- encode_xml2(str_to_lower(instituicao))
         instituicao_aux <- str_replace_all(instituicao, "[^[:alnum:]]", "") 
         
         # DETALHAMENTO- ... NOME-CURSO

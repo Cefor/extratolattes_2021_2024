@@ -27,7 +27,7 @@ banca <- function(id, xml_data,
         
         # DADOS-BASICOS- ..... NATUREZA
         nivel <- as.vector(pbanca[[i]][[1]]["NATUREZA"])
-        nivel <- str_to_lower(gsub("_", " ", nivel))
+        nivel <- encode_xml2(str_to_lower(gsub("_", " ", nivel)))
         
         # DADOS-BASICOS- ..... TITULO
         titulo <- as.vector(pbanca[[i]][[1]]["TITULO"])
@@ -38,7 +38,7 @@ banca <- function(id, xml_data,
         # DETALHAMENTO- ... NOME-DA-INSTITUICAO
         instituicao <- as.vector(pbanca[[i]][[2]]["NOME-INSTITUICAO"])
         if(is.null(instituicao)) instituicao <- ""
-        instituicao <- str_to_lower(instituicao)
+        instituicao <- encode_xml2(str_to_lower(instituicao))
         instituicao_aux <- str_replace_all(instituicao, "[^[:alnum:]]", "") 
   
         # DETALHAMENTO- ... NOME-DO-CURSO
@@ -90,7 +90,7 @@ banca <- function(id, xml_data,
         
         # DADOS-BASICOS- ..... NATUREZA
         nivel <- as.vector(pbanca[[i]][[1]]["NATUREZA"])
-        nivel <- str_to_lower(gsub("_", " ", nivel))
+        nivel <- encode_xml2(str_to_lower(gsub("_", " ", nivel)))
         
         # DADOS-BASICOS- ..... TITULO
         titulo <- as.vector(pbanca[[i]][[1]]["TITULO"])
@@ -100,7 +100,7 @@ banca <- function(id, xml_data,
         # DETALHAMENTO- ... NOME-DA-INSTITUICAO
         instituicao <- as.vector(pbanca[[i]][[2]]["NOME-INSTITUICAO"])
         if(is.null(instituicao)) instituicao <- ""
-        instituicao <- str_to_lower(instituicao)
+        instituicao <- encode_xml2(str_to_lower(instituicao))
         instituicao_aux <- str_replace_all(instituicao, "[^[:alnum:]]", "") 
         
         # quando for processo seletivo do MPPL

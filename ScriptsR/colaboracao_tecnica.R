@@ -19,10 +19,10 @@ coltec <- function(id, xml_data,
       
         p <- pcoltec[[i]][[l]]
         instituicao <- as.vector(pcoltec[[i]]$".attrs"["NOME-INSTITUICAO"])
-        vinculo <- as.vector(p[12]) # OUTRO-VINCULO-INFORMADO
+        vinculo <- encode_xml2(str_to_lower(as.vector(p[12]))) # OUTRO-VINCULO-INFORMADO
 
         # verifica se eh um item de Colaboracao Tecnica
-        ctec <- c("Membro de comite assessor", "Membro de corpo editorial")
+        ctec <- c("membro de comite assessor", "membro de corpo editorial")
       
         if(vinculo %in% ctec){
           
@@ -31,12 +31,12 @@ coltec <- function(id, xml_data,
           if((ano >= ano_ini & ano <= ano_fim) | (ano == "")){
             
             # vinclulo == "Membro de comite assessor"
-            if(vinculo == "Membro de comite assessor"){
+            if(vinculo == "membro de comite assessor"){
               pontos <- pontos_coltec(1)
               
               
               # vinclulo == "Membro de corpo editorial"
-            } else if(vinculo == "Membro de corpo editorial"){
+            } else if(vinculo == "membro de corpo editorial"){
               
               outras_inf <- as.vector(p[10]) # OUTRAS-INFORMACOES
               

@@ -1,6 +1,7 @@
 ---
 title: "Extrato Lattes"
 output: html_document
+encoding: "UTF-8"
   
 ---
 
@@ -23,7 +24,7 @@ ano_fim <- 2024
 id_especifico <- NULL 
 
 # mostrar classificação geral
-fl_classificacao <- FALSE
+fl_classificacao <- TRUE
 fl_colegiado <- TRUE # classifica com os limites do documento de recredenciamento
 
 # INSTITUICAO
@@ -31,50 +32,22 @@ fl_colegiado <- TRUE # classifica com os limites do documento de recredenciament
 nome_instituicao <- c("Câmara dos Deputados","Centro de Formação, Treinamento e Aperfeiçoamento",
                       "centro de formacao treinamento e aperfeicoamento da camara dos deputados")
 
-# nome_instituicao <- c("Escola de Guerra Naval")
-# nome_instituicao <- c("Universidade de Brasília")
-# nome_instituicao <- c("universidade federal do reconcavo da bahia")
-# nome_instituicao <- c("Universidade Federal do Paraná")
-# nome_instituicao <- c("ENAP")
-# nome_instituicao <- c("ESAO")
-# nome_instituicao <- c("Ministério da Educação")
-
 # CURSO
 # incluir dentro de c() os possíveis nomes do curso, separados por vírgula
 nome_curso <- c("Mestrado Profissional em Poder Legislativo","mestrado em poder legislativo")
 
-# nome_curso <- c("Programa de Pós-Graduacao em Estudos Marítimos") # EGN
-# nome_curso <- c("ciência política", "relações internacionais") # UnB
-# nome_curso <- c("mestrado em gestao de politicas publicas e seguranca social") # UFBA
-# nome_curso <- c("Ciência Política") # UFPR
-# nome_curso <- c("Doutorado Profissional em Políticas Públicas") # ENAP
-# nome_curso <- c("CIÊNCIAS MILITARES, COM ÊNFASE EM GESTÃO OPERACIONAL") # ESAO
-# nome_curso <- c("PÓS-GRADUAÇÃO STRICTO SENSU EM EDUCAÇÃO")
-
 # ÁREA
-# incluir dentro de c() os possíveis nomes de área, separados por vírgula
-nome_area <- c("Ciência Política e Relações Internacionais")
-
-# nome_area <- "Educação"
+nome_area <- "ciencia politica e relacoes internacionais"
 
 # pontuação 
 source("ScriptsR\\_pontuacaoCapesColegiado.R"); 
 
-
-# fl_maiorestrato: 
-# FALSE - pontua artigos pelo estrato da area A1, A2 e B1
-# TRUE - pontua artigos pelo maior estrato de A1 a B4
-# fl_maiorestrato <- TRUE
-
 # arquivos com estratos de qualificacao
 nm_qualis <- "QualisPeriodicos_2017_2020.csv" # periodicos
-
 nm_qualis_livros <- "QualisLivros_Capes_2017_2020.csv"
 nm_qualis_biblio_autor <- "QualisBiblio_Autor_2021_2024.csv"
-
 nm_qualis_tecnica <- "QualisTecnica_Capes_2017_2020.csv"
 nm_qualis_tecnica_autor <- "QualisTecnica_Autor_2021_2024.csv"
-
 
 ```
 
@@ -89,57 +62,15 @@ if(!require(dplyr)){ install.packages('dplyr') }
 
 if(!require(rio)){ install.packages('rio') }
 if(!require(abjutils)){ install.packages('abjutils') }
+if(!require(readr)){ install.packages('readr') }
+
+# if(!require(stringi)){ install.packages('stringi') }
 
 encode_xml2 <- function(txt) {
-  
   txt %>%
-     rm_accent() %>%
-#    str_replace_all("ã", "a") %>%
-#    str_replace_all("á", "a") %>%
-#    str_replace_all("à", "a") %>%
-#    str_replace_all("ä", "a") %>%
-#    str_replace_all("â", "a") %>%
-#    
-#    str_replace_all("Ã", "A") %>%
-#    str_replace_all("Á", "A") %>%
-#    str_replace_all("À", "A") %>%
-#    str_replace_all("Ä", "A") %>%
-#    str_replace_all("Â", "A") %>%
-#
-#    str_replace_all("é", "e") %>%
-#    str_replace_all("ê", "e") %>%
-#    str_replace_all("É", "E") %>%
-#    str_replace_all("Ê", "E") %>%
-#    
-#    str_replace_all("í", "i") %>%
-#    
-#    str_replace_all("Í", "I") %>%
-#
-#    str_replace_all("õ", "o") %>%
-#    str_replace_all("ó", "o") %>%
-#    str_replace_all("ö", "o") %>%
-#    str_replace_all("ô", "o") %>%
-#    
-#    str_replace_all("Õ", "O") %>%
-#    str_replace_all("Ó", "O") %>%
-#    str_replace_all("Ö", "O") %>%
-#    str_replace_all("Ô", "O") %>%
-#    
-#    str_replace_all("ú", "u") %>%
-#    str_replace_all("ü", "u") %>%
-#    
-#    str_replace_all("Ú", "U") %>%
-#    str_replace_all("Ü", "U") %>%
-#    
-#    str_replace_all("ç", "c") %>%
-#    str_replace_all("Ç", "C") %>%
-#  
-#    str_replace_all("ñ", "n") %>%
-#    str_replace_all("Ñ", "N") %>%
-#    
+    rm_accent() %>%
     str_replace_all("º", "o.") %>%
-    str_replace_all("ª", "a.") 
-
+    str_replace_all("ª", "a.")
 }
 
 # fundamental para a pontuação de orientacoes
@@ -148,19 +79,17 @@ nome_curso <- str_to_lower(encode_xml2(nome_curso))
 # fundamental para a pontuação de artigos
 nome_area <- str_to_lower(nome_area)
 
-code <- "Latin-1" # "UTF-8"
+# Latin-1 eh equivalente ao encoding="ISO-8859-1"
 
 # Qualis Periódicos - Sucupira
-# qualis_periodicos <- read.csv(nm_qualis, header = TRUE, sep = ";")
-qualis_periodicos <- import(nm_qualis, encoding = code)
+qualis_periodicos <- import(nm_qualis, encoding = "Latin-1")
 names(qualis_periodicos) <- c("ISSN", "Titulo", "Area", "Estrato")
 qualis_periodicos$ISSN <- sub("-", "", qualis_periodicos$ISSN)
 qualis_periodicos$Titulo <- str_trim(str_to_lower(encode_xml2(qualis_periodicos$Titulo)))
-qualis_periodicos$Area <- str_trim(str_to_lower(qualis_periodicos$Area))
+qualis_periodicos$Area <- str_trim(str_to_lower(encode_xml2(qualis_periodicos$Area)))
 
 # Qualis Livros - Ciência Política - estratos da ultima avaliacao quadrienal
-# qualis_livros <- read.csv(nm_qualis_livros, header = TRUE, sep = ";", colClasses = "character")
-qualis_livros <- import(nm_qualis_livros, encoding = code)
+qualis_livros <- import(nm_qualis_livros, encoding = "Latin-1")
 names(qualis_livros) <- c("Ano","Autor","Tipo","Titulo", "ISBN", "Estrato")
 qualis_livros$Ano <- str_trim(qualis_livros$Ano)
 qualis_livros$Autor <- str_trim(encode_xml2(qualis_livros$Autor))
@@ -169,8 +98,7 @@ qualis_livros$Titulo <- str_trim(str_to_lower(encode_xml2(qualis_livros$Titulo))
 qualis_livros$ISBN <- str_trim(qualis_livros$ISBN)
 qualis_livros$Estrato <- str_trim(qualis_livros$Estrato)
 # ler arquivo nm_qualis_biblio_autor, com os mesmos campos
-# qualis_biblio_autor <- read.csv(nm_qualis_biblio_autor, header = TRUE, sep = ";", colClasses = "character")
-qualis_biblio_autor <- import(nm_qualis_biblio_autor, encoding = code)
+qualis_biblio_autor <- import(nm_qualis_biblio_autor, encoding = "UTF-8")
 qualis_biblio_autor <- qualis_biblio_autor[ , 2:6]
 qualis_biblio_autor$Estrato <- "QA"
 names(qualis_biblio_autor) <- c("Ano","Autor","Tipo","Titulo", "ISBN", "Estrato")
@@ -186,14 +114,14 @@ rm(qualis_livros)
 
 
 # Qualis Tecnica - Ciência Política - estratos da ultima avaliacao quadrienal
-qualis_tecnica <- import(nm_qualis_tecnica, encoding = code)# import eh melhor que read.csv para charset
+qualis_tecnica <- import(nm_qualis_tecnica, encoding = "Latin-1")
 names(qualis_tecnica) <- c("Ano", "Autor","Titulo", "Estrato")
 qualis_tecnica$Ano <- str_trim(qualis_tecnica$Ano)
 qualis_tecnica$Autor <- str_trim(encode_xml2(qualis_tecnica$Autor))
 qualis_tecnica$Titulo <- str_trim(str_to_lower(encode_xml2(qualis_tecnica$Titulo)))
 qualis_tecnica$Estrato <- str_trim(qualis_tecnica$Estrato)
 # ler arquivo nm_qualis_tecnica_autor, com os mesmos campos
-qualis_tecnica_autor <- import(nm_qualis_tecnica_autor, encoding = code)
+qualis_tecnica_autor <- import(nm_qualis_tecnica_autor, encoding = "UTF-8")
 qualis_tecnica_autor <- qualis_tecnica_autor[ , 2:4]
 qualis_tecnica_autor$Estrato <- "QA"
 names(qualis_tecnica_autor) <- c("Ano", "Autor","Titulo", "Estrato")
@@ -263,14 +191,16 @@ for(cl in 1:nrow(clattes)){
   url <- paste0(clattes[cl, "id"], ".zip")
   url <- unzip(paste0("_Lattes\\",url))
   
-  f <- readLines("curriculo.xml")
-  f <- encode_xml2(f)
-  writeLines(f, "curriculo.xml")
-  f <- NULL
+  # codigo para ser usado no computador LENOVO - Windows 7
+  #f <- readLines("curriculo.xml", encoding="Latin-1")
+  #f <- encode_xml2(f)
+  #writeLines(f, "curriculo.xml", useBytes = TRUE)
+  #f <- NULL
   
-  data <- xmlParse("curriculo.xml", encoding = code)
+  data <- xmlParse("curriculo.xml", encoding = "ISO-8859-1")
   xml_data <- xmlToList(data)
-
+  
+  
   # identificador do Lattes
   id <- as.vector(xml_data$.attrs["NUMERO-IDENTIFICADOR"])
   # nome do professor
@@ -894,9 +824,9 @@ if(fl_classificacao){ # mostrar tabela de classificação
   df_lattes2$rev <- NULL
 
   df_lattes2 <- df_lattes2[, c("nome","bib","pbib","tec","ptec","ori","pori","ban","pban","pro","ppro","ctc","pctc","dis","pdis")]
-  df_lattes2$total  <- df_lattes2$bib + df_lattes2$tec + df_lattes2$ori + df_lattes2$ban
+  df_lattes2$total  <- df_lattes2$bib + df_lattes2$tec + df_lattes2$ori + df_lattes2$ban +
                        df_lattes2$pro + df_lattes2$ctc + df_lattes2$dis
-  df_lattes2$ptotal <- df_lattes2$pbib + df_lattes2$ptec + df_lattes2$pori + df_lattes2$pban
+  df_lattes2$ptotal <- df_lattes2$pbib + df_lattes2$ptec + df_lattes2$pori + df_lattes2$pban +
                        df_lattes2$ppro + df_lattes2$pctc + df_lattes2$pdis
   # classificacao em ordem decrescente de pontuacao,
   # com desempate pela pontuacao total

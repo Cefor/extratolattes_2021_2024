@@ -79,7 +79,7 @@ livros <- function(id, nome, xml_data, qualis_biblio, ano_ini, ano_fim,
       if((ano >= ano_ini & ano <= ano_fim) | fl_rlvnc=="SIM"){
         # recupera dados basicos do livro
         isbn <- xml_data$"PRODUCAO-BIBLIOGRAFICA"$"LIVROS-E-CAPITULOS"$"CAPITULOS-DE-LIVROS-PUBLICADOS"[[i]]$"DETALHAMENTO-DO-CAPITULO"["ISBN"] %>% str_trim
-        tipo <- rm_accent(xml_data$"PRODUCAO-BIBLIOGRAFICA"$"LIVROS-E-CAPITULOS"$"CAPITULOS-DE-LIVROS-PUBLICADOS"[[i]]$"DADOS-BASICOS-DO-CAPITULO"["TIPO"])
+        tipo <- encode_xml2(xml_data$"PRODUCAO-BIBLIOGRAFICA"$"LIVROS-E-CAPITULOS"$"CAPITULOS-DE-LIVROS-PUBLICADOS"[[i]]$"DADOS-BASICOS-DO-CAPITULO"["TIPO"])
         titulo <- xml_data$"PRODUCAO-BIBLIOGRAFICA"$"LIVROS-E-CAPITULOS"$"CAPITULOS-DE-LIVROS-PUBLICADOS"[[i]]$"DADOS-BASICOS-DO-CAPITULO"["TITULO-DO-CAPITULO-DO-LIVRO"]
         titulo <- str_trim(encode_xml2(titulo))
         edicao <- xml_data$"PRODUCAO-BIBLIOGRAFICA"$"LIVROS-E-CAPITULOS"$"CAPITULOS-DE-LIVROS-PUBLICADOS"[[i]]$"DETALHAMENTO-DO-CAPITULO"["NUMERO-DA-EDICAO-REVISAO"]

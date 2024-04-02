@@ -1,4 +1,4 @@
-## EXTRATO LATTES (2020-2024)
+﻿## EXTRATO LATTES (2020-2024)
 
 ### Autor: Fabiano Peruzzo Schwartz
 
@@ -44,6 +44,7 @@ Da mesma forma, os egressos podem ser convidados a atualizar o Lattes a partir d
 
 
 ## Pasta *Documentos*
+
 
 * **ManualPreenchimentoLattes.pdf**: contém instruções de preenchimento do currículo Lattes de forma que a pontuação possa ser computada corretamente no extrato; as instruções são ajustadas às orientações contidas nos documentos da área de Ciência Política e Relações Internacionais.
 
