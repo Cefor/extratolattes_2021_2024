@@ -6,7 +6,7 @@
 
 ## Introdução
 
-O presente repositório se destina ao compartilhamento de scripts escritos na linguagem R para a geração de extrato da produção de docentes com base nas informações do currículo lattes.
+O presente repositório é uma atualização do [Extrato Lattes (2017-2020)](https://github.com/Cefor/extratolattes) e se destina ao compartilhamento de scripts escritos na linguagem R para a geração de extrato da produção de docentes com base nas informações do currículo lattes.
 
 O principal objetivo é acompanhar, de forma sistemática, a atuação de docentes em cursos de pós-graduação *stricto sensu* por meio da geração periódica de extratos. Dessa forma, pretende-se atrair a atenção para os principais pontos da avaliação da Capes, a fim de que a devida atualização do Lattes e ações corretivas possam acontecer em tempo. Essa prática pode contornar situações em que, por exemplo, um professor não venha a pontuar na avaliação do quadriênio por ter informado ISSN distinto daquele que consta na base Qualis.
 
